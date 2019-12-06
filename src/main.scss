@@ -27,6 +27,11 @@ body {
   }
 }
 
+strong {
+  font-family: $font-family;
+  font-weight: bold;
+  margin: 0 3px;
+}
 a {
   text-decoration: none;
   color: $color-green;
@@ -225,12 +230,14 @@ a {
     overflow: hidden;
     ul {
       li {
-        margin-top: 8px;
+        &:not(:first-of-type) {
+          margin-top: 8px;
+        }
         list-style: square inside;
       }
     }
 
-    .item {
+    .item:not(:last-of-type) {
       margin-bottom: 20px;
     }
   }
@@ -268,13 +275,13 @@ a {
   }
   .item-hd {
     position: relative;
-    padding: 10px 0 5px;
+    padding: 10px 0 0;
     line-height: 20px;
     overflow: hidden;
     font-weight: 500;
     min-height: 30px;
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 18px;
+    margin-bottom: 14px;
     .item-time {
       display: inline-block;
       float: left;
@@ -287,6 +294,9 @@ a {
         margin-bottom: 5px;
       }
     }
+    .item-tag {
+      font-size: 18px;
+    }
     .item-more {
       position: absolute;
       top: 10px;
@@ -297,7 +307,6 @@ a {
     }
   }
   .item-bd {
-    margin-bottom: 5px;
     > p:not(:first-of-type) {
       margin-top: 8px;
     }
@@ -322,18 +331,6 @@ a {
       margin: 2px;
       padding: 0 3px;
       background-color: #f7f7f7;
-    }
-    strong {
-      font-family: $font-family;
-      font-size: 12px;
-      line-height: 14px;
-      border: 1px solid #f3f3f3;
-      @include border-radius(3px);
-      font-weight: 500;
-      color: #444;
-      margin: 2px;
-      padding: 0 3px;
-      background-color: #f6f6f6;
     }
   }
   .practice {
@@ -372,6 +369,6 @@ a {
   }
 
   @media print {
-    display: none;
+    display: none !important;
   }
 }
