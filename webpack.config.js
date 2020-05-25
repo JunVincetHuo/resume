@@ -1,56 +1,48 @@
-const path = require('path');
-const { WebPlugin } = require('web-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // 抽离html
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   output: {
-    publicPath: '',
-    filename: '[name].js',
+    publicPath: "",
+    filename: "[name].js",
   },
   resolve: {
     // 加快搜索速度
-    modules: [path.resolve(__dirname, 'node_modules')],
+    modules: [path.resolve(__dirname, "node_modules")],
     // es tree-shaking
-    mainFields: ['jsnext:main', 'browser', 'main'],
+    mainFields: ["jsnext:main", "browser", "main"],
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
         // 提取出css
-        loaders: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        }),
-        include: path.resolve(__dirname, 'src')
-      },
-      {
-        test: /\.css$/,
-        // 提取出css
-        loaders: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader'],
-        }),
+        loaders: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        include: path.resolve(__dirname, "src"),
       },
       {
         test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
-        loader: 'base64-inline-loader',
+        loader: "base64-inline-loader",
       },
-    ]
+    ],
   },
   entry: {
-    main: './src/main.js',
+    main: "./src/main.js",
   },
   plugins: [
-    new WebPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
+    // 打包生成html
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html", // 打包后的文件名
+      minify: {
+        removeAttributeQuotes: false, // 是否删除属性的双引号
+        collapseWhitespace: false, // 是否折叠空白
+      },
     }),
-    new ExtractTextPlugin({
-      filename: '[name].css',
-      allChunks: true,
+    new MiniCssExtractPlugin({
+      filename: "[name]_[contenthash].css",
     }),
   ],
-  devtool: 'source-map',
+  devtool: "source-map",
 };

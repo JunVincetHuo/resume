@@ -63,6 +63,7 @@ a {
   margin-left: -500px;
   font-size: 12px;
   text-align: right;
+  cursor: pointer;
   @media screen and (max-width: 1024px) {
     display: none;
   }
@@ -175,7 +176,6 @@ a {
         margin: 16px 0 0;
       }
       & > li {
-        height: 22px;
         @media screen and (max-width: 720px) {
           display: inline-block;
         }
@@ -230,9 +230,7 @@ a {
     overflow: hidden;
     ul {
       li {
-        &:not(:first-of-type) {
-          margin-top: 8px;
-        }
+        margin-top: 8px;
         list-style: square inside;
       }
     }
