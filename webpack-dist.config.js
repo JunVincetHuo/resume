@@ -49,7 +49,7 @@ module.exports = {
     }),
     // 打包生成html
     new HtmlWebpackPlugin({
-      template: resolve("./src/index.html"),
+      template: "./src/index.html",
       filename: "index.html", // 打包后的文件名
       minify: {
         removeAttributeQuotes: false, // 是否删除属性的双引号
